@@ -4,7 +4,9 @@
 
 **Staged workflows for coding agents.** You start every task with `/rocket`. A router picks the one workflow that fits the request, and that workflow walks the agent through fixed stages with approval gates. You approve the plan and you validate the result. Everything in between the agent does on its own.
 
-Works with **Claude Code** and **Codex** (same plugin, same skills, same hooks).
+Works with **Claude Code** and **Codex**.
+
+> **Directory edition.** This is the version listed in the Claude plugin directory. It contains the skills only. The full version with the safety hooks (stop guard, git guard) is on the [`main` branch](https://github.com/Exxzzent/rocket/tree/main) and installs with `claude plugin marketplace add Exxzzent/rocket`.
 
 ## How it works
 
@@ -49,14 +51,7 @@ The agent commits, pushes and opens a PR. If you ask for it in chat ("push to ma
 
 ## Safety hooks
 
-The skills keep a local state file `.rocket/state.json` with the current stage and status. Two hooks read it:
-
-| Hook | What it does |
-| --- | --- |
-| **Stop guard** | Blocks the agent from ending its turn while a stage is still `working`, or from handing off before an interactive test report exists. Gives up after 5 consecutive blocks, so it can never trap a session. |
-| **Git guard** | While a workflow is active, blocks `git push` and `gh pr create` until you have approved shipping in chat, or pre-authorised autonomous PRs (for example many stacked PRs). It never blocks merges or the push target. Those follow what you say in chat. |
-
-Each command is judged by the state of the directory it runs in, so `cd` and `git -C` are followed. Without a state file nothing is blocked. The hooks only affect agents, never your own terminal.
+The skills keep a local state file `.rocket/state.json` with the current stage and status. In the full version on `main`, two hooks read it: a stop guard (no quitting mid-stage or before the interactive test) and a git guard (no push or PR before your ship approval). This directory edition has no hooks, so the stages and gates are followed by the skills' instructions alone.
 
 ## Install
 
@@ -75,10 +70,6 @@ codex plugin add rocket@rocket
 ```
 
 Codex shows the same names (`rocket:launch`, `rocket:fix`, …).
-
-**Trust the hooks once.** Codex does not run plugin hooks until you approve them, and skips them silently until then. Start `codex`, open `/hooks` and trust the two rocket hooks: `Stop` → `stop_guard.py` and `PreToolUse` → `git_guard.py`. Trust is stored per hook definition, so after an update that changes the hooks, trust them again in `/hooks`.
-
-Hooks need `python3` (3.9+).
 
 ## Set up a project
 

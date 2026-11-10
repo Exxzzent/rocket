@@ -8,7 +8,6 @@
   "license": "MIT",
   "keywords": ["skills", "workflow", "stages", "approval-gates", "testing", "hooks"],
   "skills": "./skills/",
-  "hooks": "./hooks/hooks.json",
   "interface": {
     "displayName": "Rocket",
     "shortDescription": "Staged workflows with approval gates for coding agents",
