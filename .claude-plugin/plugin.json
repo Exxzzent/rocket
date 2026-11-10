@@ -1,0 +1,11 @@
+{
+  "name": "rocket",
+  "description": "Staged agent workflows: one router picks the right flow for features, bugfixes, reviews, tests, small changes and questions, with approval gates and hooks that stop agents from quitting early or shipping before approval.",
+  "version": "0.1.0",
+  "author": { "name": "Exxzzent", "url": "https://github.com/Exxzzent" },
+  "homepage": "https://github.com/Exxzzent/rocket",
+  "repository": "https://github.com/Exxzzent/rocket",
+  "license": "MIT",
+  "icon": "./assets/icon.png",
+  "keywords": ["skills", "workflow", "stages", "approval-gates", "testing", "hooks"]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "rocket",
+  "description": "Marketplace for the rocket staged-workflow plugin",
+  "owner": { "name": "Exxzzent", "url": "https://github.com/Exxzzent" },
+  "plugins": [
+    {
+      "name": "rocket",
+      "description": "Staged agent workflows with a router, approval gates and safety hooks",
+      "version": "0.1.0",
+      "source": "./",
+      "author": { "name": "Exxzzent", "url": "https://github.com/Exxzzent" }
+    }
+  ]
+}

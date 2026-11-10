@@ -1,0 +1,12 @@
+{
+  "name": "rocket",
+  "interface": { "displayName": "Rocket" },
+  "plugins": [
+    {
+      "name": "rocket",
+      "source": { "source": "url", "url": "./" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Developer Tools"
+    }
+  ]
+}
