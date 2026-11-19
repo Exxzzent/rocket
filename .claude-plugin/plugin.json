@@ -7,5 +7,6 @@
   "repository": "https://github.com/Exxzzent/rocket",
   "license": "MIT",
   "icon": "./assets/icon.png",
+  "skills": "./claude/skills/",
   "keywords": ["skills", "workflow", "stages", "approval-gates", "testing"]
 }

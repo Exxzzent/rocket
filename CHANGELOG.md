@@ -4,6 +4,16 @@ All notable changes to rocket are listed here. The format follows [Keep a Change
 
 ## [Unreleased]
 
+### Added
+- Codex: the iOS simulator is shown in the Codex in-app browser for the user test, with the native simulator app as fallback. Agent tests run headless (#1).
+- Codex: rocket skill instructions take precedence over Codex's default response and execution behaviour (#4).
+- PRs for tasks based on a GitHub issue reference it with `Closes #N` or `Fixes #N`, and only when the issue is fully resolved (#3).
+
+### Changed
+- Every ambiguity and missing requirement is clarified in the planning stage. The build stage does not start while a question is open (#2).
+- Question rounds allow up to 3 questions instead of 2.
+- Skills are split into `claude/skills/` and `codex/skills/`, so each agent loads only its own rules.
+
 ## [0.1.0] - 2026-11-10
 
 First public release for Claude Code and Codex.

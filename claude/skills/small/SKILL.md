@@ -21,7 +21,7 @@ Baseline (conventions §7, a worktree as the project requires). Then:
 ✋ OK?
 ```
 
-At most 1 question, clickable. State: `waiting_for_user, gate plan_approval`. Wait.
+Ask about anything unclear now (conventions §4), 1 clickable question per round. Stage 2 never begins while a question is open. State: `waiting_for_user, gate plan_approval`. Wait.
 
 ## 🛠️ Stage 2 — Change & check
 
@@ -38,4 +38,4 @@ State: `waiting_for_user, gate ship_approval`.
 
 ## 🚀 Stage 3 — PR
 
-On approval: `ship_approved true`, commit in the profile format, push and open a PR as in conventions §5 (or push to `main` / merge if the user asked for it), 🧹 cleanup, then one line: `🚀 Done — <PR link or commit>`. Delete the state file.
+On approval: `ship_approved true`, commit in the profile format, push and open a PR as in conventions §5 (or push to `main` / merge if the user asked for it), with the issue reference (`Closes #N`) if the task is based on an issue, 🧹 cleanup, then one line: `🚀 Done — <PR link or commit>`. Delete the state file.
