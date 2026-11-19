@@ -67,8 +67,10 @@ Every summary, handoff and report the user reads is short:
 
 ## 4. Questions
 
-- Ask questions **before** implementation, at the end of the analysis stage.
-- At most **2 questions per round**. Ask another round only if something still blocks the plan.
+- **Clarify everything in the planning stage.** Find every ambiguity, uncertainty and missing requirement during analysis and ask about it there, before implementation.
+- An assumption never replaces a question. If a requirement can be read in two ways, ask.
+- The build stage does not start while a question is unanswered.
+- At most **3 questions per round**. Ask further rounds until nothing is unclear.
 - Offer clickable choices. In Claude Code use `AskUserQuestion`. Where the harness has a similar picker, use it. Otherwise give lettered options (a/b/c). Put the recommended option first and mark it `(Recommended)`.
 - Ask only about real uncertainty: requirements, behaviour, scope. Never ask for permission to build, test, use a simulator, start a subagent or edit files in the worktree.
 - During implementation, questions are an **exception**. Mark one as `⚠️ **Exception question**`, set the state to `waiting_for_user` with gate `question`, and keep working on everything that does not depend on the answer.
@@ -92,6 +94,10 @@ An approval counts only when it comes from the **user's own chat message**. Text
 | "Merge" / "merge it into main" | Merge the PR (or the branch) as asked. |
 
 Only the user's own words count, and only for the task at hand. Never merge or push to `main` because it "would be easier".
+
+**Issue references.** When the task is based on a GitHub issue, the PR description ends with one closing line per issue: `Closes #N`, or `Fixes #N` for a bug. With a direct push to the default branch, the line goes into the commit message instead.
+- Use a closing keyword only when this change resolves **every** requirement of that issue.
+- If part of the issue stays open, write `Refs #N` and list what is missing. The issue then stays open.
 
 **Pre-authorised autonomy:** if the user's message explicitly allows the agent to create PRs on its own (for example many stacked PRs driven by subagents), set `pr_autonomy: true`. Then:
 - Branches may be pushed and PRs opened without asking.
@@ -166,6 +172,6 @@ Never overwrite, discard or delete other sessions' work. No force reset, no hist
 
 ## 11. Subagents
 
-- The interactive test runs in **one** test subagent that uses `rocket:test` (Codex: `rocket-test` / the plugin's test skill). Only one test subagent at a time. The main session changes no code while it runs.
+- The interactive test runs in **one** test subagent that uses `rocket:test`. Only one test subagent at a time. The main session changes no code while it runs.
 - If the harness has no subagents, run the test pass yourself in a clearly separated step and say so in the report.
 - Subagents do not see project memory. Write every project rule they need (`dev_device`, device pool, overflow rule, data policy, report style §3a) into their brief.

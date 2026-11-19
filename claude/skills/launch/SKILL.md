@@ -26,7 +26,7 @@ State: `stage 1, status working`.
 3. **Write the plan file** (`docs/rocket/plans/YYYY-MM-DD-<slug>.md`). Use superpowers:writing-plans if available. It contains:
    - Goal, baseline commits, approach, files to touch, step-by-step tasks
    - **Test cases**, written now, before any code, in a table. Each one has an ID (`TC1`…), a group, the user-level steps, the **expected result** and how it is verified (unit, interactive, both). Cover the main flow, edge cases (empty or invalid input, cancel and reopen, repeated actions, fast switching, unusual order) and regressions. For a refactor, the cases state that behaviour stays **unchanged**.
-4. **Questions** (conventions §4): at most 2 per round, clickable, recommendation first. Repeat until nothing blocks the plan. Update the plan with the answers.
+4. **Questions** (conventions §4): resolve every ambiguity, uncertainty and missing requirement now. At most 3 per round, clickable, recommendation first. Repeat until nothing is unclear. Never plan on an assumption instead of asking. Update the plan with the answers.
 5. **Present the summary**, exactly this shape, short phrases, not full prose. The test groups and counts are taken from the plan's test table:
 
 ```
@@ -52,7 +52,9 @@ State: `stage 1, status working`.
 ✋ Waiting for your approval.
 ```
 
-State: `status waiting_for_user, gate plan_approval`. **Stop and wait.** No implementation before the user approves in chat.
+Unanswered requirement questions never go under **⚠️ Risks / open**. Ask them first, then present the summary.
+
+State: `status waiting_for_user, gate plan_approval`. **Stop and wait.** No implementation before the user approves in chat. Stage 2 never begins while a question is open.
 
 ## 🛠️ Stage 2 — Build & Verify
 
@@ -120,7 +122,7 @@ A successful agent test or the Stage-1 approval never replaces this approval.
 State: `stage 4, status working`.
 
 1. **Final check:** builds and the full automated suite on the final state. Interactive test only for cases whose code changed since the last pass. On failure, go back to the loop. New substantive changes go to the user again.
-2. **Commit, push, PR:** commit in the profile's format. By default push the **feature branch** and open a PR with test results and evidence links. If the user asked for a direct push to `main` or a merge, do exactly that (conventions §5).
+2. **Commit, push, PR:** commit in the profile's format. By default push the **feature branch** and open a PR with test results, evidence links and the issue reference (conventions §5, `Closes #N`) if the task is based on an issue. If the user asked for a direct push to `main` or a merge, do exactly that (conventions §5).
 3. **🧹 Cleanup:** remove `temp_data`, delete `created_devices`, shut down used pool devices, quit test apps, remove your temp logs and build output from the project. Keep the reports and screenshots referenced in the PR. Remove the worktree only when everything is pushed and the evidence is safe.
 4. **Final summary**, then delete `.rocket/state.json`:
 
