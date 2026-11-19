@@ -27,7 +27,7 @@ State: `stage 1, status working, requires_interactive_test false`.
 ## 🧭 Stage 2 — Findings & approval
 
 1. **Write the plan file** (`docs/rocket/plans/YYYY-MM-DD-fix-<slug>.md`): reproduction, evidence, root cause, fix approach, files, and **test cases** with expected results. Always include the failing regression test, the original bug's steps as an interactive case, and neighbouring flows that could break.
-2. **Questions** (conventions §4): at most 2 per round, clickable, recommendation first. Update the plan with the answers.
+2. **Questions** (conventions §4): resolve every ambiguity, uncertainty and missing requirement now. At most 3 per round, clickable, recommendation first. Repeat until nothing is unclear. Never plan on an assumption instead of asking. Update the plan with the answers.
 3. **Present**, exactly this shape. The test groups and counts come from the plan's test table:
 
 ```
@@ -56,7 +56,9 @@ State: `stage 1, status working, requires_interactive_test false`.
 ✋ Waiting for your approval to fix.
 ```
 
-State: `status waiting_for_user, gate plan_approval`. **Stop and wait.**
+Unanswered requirement questions never go under **⚠️ Risks / open**. Ask them first, then present the findings.
+
+State: `status waiting_for_user, gate plan_approval`. **Stop and wait.** Stage 3 never begins while a question is open.
 
 ## 🛠️ Stage 3 — Fix & Verify
 
@@ -78,7 +80,7 @@ The same "may NOT end" list and excuses table as `rocket:launch` Stage 2 apply. 
 
 ## 🚀 Stage 5 — Done
 
-Identical to `rocket:launch` Stage 4: final check, commit, push and PR as in conventions §5 (link the issue, e.g. "Fixes #N"), 🧹 cleanup, `## 🚀 Done` summary, delete the state file.
+Identical to `rocket:launch` Stage 4: final check, commit, push and PR as in conventions §5 (with the issue reference, `Fixes #N`, if the bug came from an issue), 🧹 cleanup, `## 🚀 Done` summary, delete the state file.
 
 ## Red flags
 

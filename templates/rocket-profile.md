@@ -1,6 +1,6 @@
 # Rocket profile template
 
-Copy this section into your project's `CLAUDE.md` (and point `AGENTS.md` at it). Delete lines you do not need, because rocket falls back to its defaults. Everything here overrides `skills/rocket/conventions.md`.
+Copy this section into your project's `CLAUDE.md` (and point `AGENTS.md` at it). Delete lines you do not need, because rocket falls back to its defaults. Everything here overrides the `rocket/conventions.md` of the skills.
 
 ```markdown
 ## Workflow

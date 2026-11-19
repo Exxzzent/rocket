@@ -4,7 +4,7 @@
 
 **Staged workflows for coding agents.** You start every task with `/rocket`. A router picks the one workflow that fits the request, and that workflow walks the agent through fixed stages with approval gates. You approve the plan and you validate the result. Everything in between the agent does on its own.
 
-Works with **Claude Code** and **Codex** (same plugin, same skills, same hooks).
+Works with **Claude Code** and **Codex** (same plugin, same workflows, same hooks).
 
 ## How it works
 
@@ -31,7 +31,7 @@ The line carries only the workflow and its classification. If the choice is wron
 
 ### 2. Plan first, tests included
 
-The agent analyses the request on a fresh baseline and asks open questions only now: at most 2 per round, clickable, with a recommendation. Then it writes a plan to `docs/rocket/plans/` that already contains the test cases with expected results. Nothing is built before you approve the plan. ✋
+The agent analyses the request on a fresh baseline and asks open questions only now: at most 3 per round, clickable, with a recommendation. Then it writes a plan to `docs/rocket/plans/` that already contains the test cases with expected results. Nothing is built before you approve the plan. ✋
 
 For a bug, the agent first reproduces it and finds the root cause, then presents the findings and the fix plan for approval.
 
@@ -78,6 +78,8 @@ Codex shows the same names (`rocket:launch`, `rocket:fix`, …).
 
 **Trust the hooks once.** Codex does not run plugin hooks until you approve them, and skips them silently until then. Start `codex`, open `/hooks` and trust the two rocket hooks: `Stop` → `stop_guard.py` and `PreToolUse` → `git_guard.py`. Trust is stored per hook definition, so after an update that changes the hooks, trust them again in `/hooks`.
 
+**iOS simulator in the app.** For your test, Codex mirrors the simulator into its in-app browser instead of opening Device Hub. Install the *Build iOS Apps* plugin for that. Without it, rocket falls back to `npx serve-sim`, and to the native simulator app when no in-app browser exists (CLI).
+
 Hooks need `python3` (3.9+).
 
 ## Set up a project
@@ -91,6 +93,8 @@ Artefacts (plans, test reports, screenshots) go to `docs/rocket/`.
 ## Develop
 
 The repository ships only the plugin. Tests (`tests/`) and rocket artefacts (`docs/`) are kept locally and ignored by git.
+
+Each agent has its own skill tree, so its context holds no rules meant for the other one: `claude/skills/` for Claude Code, `codex/skills/` for Codex. Make every skill change in both trees. Only rules that concern one agent alone differ, such as the "Codex rules" section in `codex/skills/rocket/conventions.md`.
 
 ### Release
 
